@@ -1,0 +1,96 @@
+.user-card {
+  width: 90%;
+  max-width: 450px;
+  margin: 30px auto;
+  padding: 25px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 20px;
+  text-align: center;
+  color: #f0f6fc;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.user-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #58a6ff;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.user-name {
+  display: block;
+  text-decoration: none;
+  color: #f0f6fc;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.user-name:hover {
+  color: #58a6ff;
+}
+
+.user-location,
+.user-company,
+.user-blog,
+.user-twitter,
+.user-created-at {
+  color: #8b949e;
+  font-size: 0.95rem;
+  margin: 8px 0;
+  word-break: break-word;
+}
+
+.user-bio {
+  margin: 20px 0;
+  color: #c9d1d9;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.user-stats {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 10px 0;
+  color: #f0f6fc;
+}
+
+.user-created-at {
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .user-card {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .user-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-name {
+    font-size: 1.4rem;
+  }
+
+  .user-bio,
+  .user-location,
+  .user-company,
+  .user-blog,
+  .user-twitter,
+  .user-created-at,
+  .user-stats {
+    font-size: 0.9rem;
+  }
+}
