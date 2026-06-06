@@ -1,104 +1,112 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import UserCard from './UserCard';
 import './SearchBar.css';
-import Followers from './Pages/Followers';
 
-function SearchBar() {
+function SearchBar({ children }) {
+  const [Username, setUsername] = useState({});
+  const [Followers, setFollowers] = useState([]);
+  const [Following, setFollowing] = useState([]);
+  const [repositories, setRepositories] = useState([]);
 
-const [Username, setUsername] = useState({});
-const [Followers, setFollowers] = useState([]);
-const [Following, setFollowing] = useState([]);
+  const handleSearch = async () => {
+    const inputElement = document.getElementById('search-input');
+    const username = inputElement.value;
 
-const searchUser = async (username) => {
-    try{
-        const response = await fetch(`https://api.github.com/users/${username}`);
-        const userData = await response.json();
-        console.log(userData);
-      // 
-        const followersResponse = await fetch(userData.followers_url);
-        const followersData = await followersResponse.json();
-        console.log(followersData);
+    if (!username) return;
 
-        const followingResponse = await fetch(userData.following_url.replace('{/other_user}', ''));
-        const followingData = await followingResponse.json();
-        console.log(followingData);
+    try {
+      const response = await fetch(`https://api.github.com/users/${username}`);
+      if (!response.ok) throw new Error('User not found');
+      const userData = await response.json();
 
-        if(userData.message === 'Not Found'){
-            alert('User not found!');
-            return;
-        }
-        setUsername({
-            image: userData.avatar_url,
-            name: userData.name,
-            bio: userData.bio,
-            avatar: userData.avatar_url,
-            followers: userData.followers,
-            // followers_url: userData.followers_url,
-            following: userData.following,
-            // following_url: userData.following_url,
-            repos: userData.public_repos,
-            profilelink: userData.html_url,
-            location: userData.location,
-            company: userData.company,
-            blog: userData.blog,
-            twitter: userData.twitter_username,
-            created_at: userData.created_at
-        })
-        setFollowers(followersData);
-        setFollowing(followingData);
+      setUsername(userData);
 
+      // Fetch followers
+      const followersRes = await fetch(userData.followers_url);
+      const followersData = await followersRes.json();
+      setFollowers(followersData);
+
+      // Fetch following
+      const followingRes = await fetch(`https://api.github.com/users/${username}/following`);
+      const followingData = await followingRes.json();
+      setFollowing(followingData);
+
+      // Fetch repositories
+      const reposRes = await fetch(userData.repos_url);
+      const reposData = await reposRes.json();
+      setRepositories(reposData);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      setUsername({});
+      setFollowers([]);
+      setFollowing([]);
+      setRepositories([]);
     }
-    catch(error){
-        console.error('Error fetching user data:', error);
-    }
-}
-
-const handleSearch = () => {
-    console.log('Search button clicked');
-    const username = document.getElementById('search-input').value;
-    searchUser(username);
-}
-
+  };
 
   return (
     <div className='search-bar'>
-      <input
-        className='search-input'  
-        id="search-input" 
-        type='text' 
-        placeholder='Search...' 
-        onChange={
-            (e) =>{e.target.value =e.target.value.toLowerCase()}
-        }
-         onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch();
-              }
-          } }
-        
-    />
-      <button className='search-button' onClick={handleSearch}>Search</button>
+      <div className='search-input-container'>
+        <input
+          className='search-input'
+          id="search-input"
+          type='text'
+          placeholder='Search GitHub username...'
+          onChange={(e) => {
+            e.target.value = e.target.value.toLowerCase();
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
+        />
 
-      <UserCard userdata={{
-        image: Username.image,
-        name: Username.name,
-        bio: Username.bio,
-        avatar: Username.avatar,
-        followers: Username.followers,
-        following: Username.following,
-        profilelink: Username.profilelink,
-        created_at: Username.created_at,
-        location: Username.location,
-        company: Username.company,
-        blog: Username.blog,
-        twitter: Username.twitter
-      }}
-      Followers={Followers}
-      Following={Following}
-      />
+        <button
+          className='search-button'
+          onClick={handleSearch}
+        >
+          Search
+        </button>
+      </div>
+
+      <div className='dashboard'>
+
+        <UserCard
+          userdata={{
+            image: Username.avatar_url,
+            name: Username.name,
+            bio: Username.bio,
+            avatar: Username.avatar_url,
+            followers: Username.followers,
+            following: Username.following,
+            profilelink: Username.html_url,
+            created_at: Username.created_at,
+            location: Username.location,
+            company: Username.company,
+            blog: Username.blog,
+            twitter: Username.twitter_username,
+            repos: Username.public_repos,
+          }}
+          Followers={Followers}
+          Following={Following}
+          Repositories={repositories}
+        />
+
+        <div className='result-section'>
+          {children || (
+            <>
+              <h2>Choose an option from the profile</h2>
+              <p>
+                Click on Followers, Following, or Repositories to view details.
+              </p>
+            </>
+          )}
+        </div>
+
+      </div>
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;

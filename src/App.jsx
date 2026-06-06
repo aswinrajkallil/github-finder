@@ -7,14 +7,13 @@ import Repositories from './Components/Pages/Repositories'
 
 function App() {
   return (
-      <div>
-        <SearchBar/>
-        <Routes>
-          <Route path="/followers" element={<Followers />} />
-          <Route path="/following" element={<Following />} />
-          <Route path="/repositories" element={<Repositories />} />
-        </Routes>
-      </div>
+    <SearchBar>
+      <Routes>
+        <Route path="/followers" element={<Followers />} />
+        <Route path="/following" element={<Following />} />
+        <Route path="/repositories" element={<Repositories />} />
+      </Routes>
+    </SearchBar>
   )
 }
 

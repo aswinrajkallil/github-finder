@@ -1,96 +1,308 @@
+/* ===== UserCard.css - User Profile Card Component ===== */
+
+/* ===== Profile Card Container ===== */
+
 .user-card {
-  width: 90%;
-  max-width: 450px;
-  margin: 30px auto;
-  padding: 25px;
-  background: #0d1117;
-  border: 1px solid #30363d;
-  border-radius: 20px;
-  text-align: center;
-  color: #f0f6fc;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  padding: 1.875rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 2rem;
+  transition: all var(--transition-normal);
 }
 
+.user-card:hover {
+  border-color: var(--accent-blue);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-3px);
+}
+
+/* ===== Avatar Image ===== */
+
 .user-avatar {
-  width: 130px;
-  height: 130px;
+  display: block;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 1.5rem;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid #58a6ff;
-  margin-bottom: 15px;
+  border: 4px solid var(--accent-blue);
   cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 16px rgba(88, 166, 255, 0.2);
 }
+
+.user-avatar:hover {
+  transform: scale(1.08);
+  border-color: var(--accent-blue-light);
+  box-shadow: 0 6px 24px rgba(88, 166, 255, 0.3);
+}
+
+/* ===== User Name ===== */
 
 .user-name {
   display: block;
   text-decoration: none;
-  color: #f0f6fc;
-  font-size: 1.8rem;
+  color: var(--text-primary);
+  font-size: 1.75rem;
   font-weight: 700;
-  margin-bottom: 15px;
-  cursor: pointer;
-  transition: 0.3s;
+  text-align: center;
+  margin-bottom: 1rem;
+  transition: color var(--transition-normal);
+  line-height: 1.3;
 }
 
 .user-name:hover {
-  color: #58a6ff;
+  color: var(--accent-blue);
 }
+
+/* ===== Bio Section ===== */
+
+.user-bio {
+  margin: 1.5rem 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  text-align: center;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== User Details (Location, Company, Blog, Twitter) ===== */
 
 .user-location,
 .user-company,
 .user-blog,
 .user-twitter,
 .user-created-at {
-  color: #8b949e;
-  font-size: 0.95rem;
-  margin: 8px 0;
+  color: var(--text-tertiary);
+  font-size: 0.9rem;
+  margin: 0.75rem 0;
   word-break: break-word;
+  text-align: center;
+  transition: color var(--transition-fast);
 }
 
-.user-bio {
-  margin: 20px 0;
-  color: #c9d1d9;
-  line-height: 1.6;
-  font-size: 1rem;
+.user-location::before {
+  content: "📍 ";
+  margin-right: 0.5rem;
+  color: var(--accent-blue);
 }
+
+.user-company::before {
+  content: "🏢 ";
+  margin-right: 0.5rem;
+  color: var(--accent-blue);
+}
+
+.user-blog::before {
+  content: "🔗 ";
+  margin-right: 0.5rem;
+  color: var(--accent-blue);
+}
+
+.user-twitter::before {
+  content: "𝕏 ";
+  margin-right: 0.5rem;
+  color: var(--accent-blue);
+}
+
+.user-location:hover,
+.user-company:hover,
+.user-blog:hover,
+.user-twitter:hover {
+  color: var(--accent-blue-light);
+}
+
+/* ===== Navigation Stats/Buttons ===== */
 
 .user-stats {
-  background: #161b22;
-  border: 1px solid #30363d;
+  display: block;
+  text-decoration: none;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 12px;
-  margin: 10px 0;
-  color: #f0f6fc;
+  padding: 1rem 1.25rem;
+  margin: 0.875rem 0;
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
 }
+
+.user-stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(88, 166, 255, 0.2), transparent);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.user-stats:hover::before {
+  left: 100%;
+}
+
+.user-stats:hover {
+  background-color: var(--accent-blue);
+  border-color: var(--accent-blue-light);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(88, 166, 255, 0.3);
+}
+
+.user-stats:active {
+  transform: translateY(-1px);
+}
+
+/* ===== Member Since ===== */
 
 .user-created-at {
-  margin-top: 20px;
+  margin-top: 1.5rem;
+  margin-bottom: 0;
   font-style: italic;
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+/* ===== Responsive Design ===== */
+
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
   .user-card {
-    width: 95%;
-    padding: 20px;
+    position: static;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+
+  .user-avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.25rem;
+  }
+
+  .user-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .user-bio {
+    font-size: 0.9rem;
+    margin: 1rem 0;
+  }
+
+  .user-stats {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+    margin: 0.75rem 0;
+  }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  .user-card {
+    padding: 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.25rem;
   }
 
   .user-avatar {
     width: 100px;
     height: 100px;
+    margin-bottom: 1rem;
   }
 
   .user-name {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
   }
 
-  .user-bio,
+  .user-bio {
+    font-size: 0.85rem;
+    margin: 0.875rem 0;
+  }
+
   .user-location,
   .user-company,
   .user-blog,
   .user-twitter,
-  .user-created-at,
-  .user-stats {
-    font-size: 0.9rem;
+  .user-created-at {
+    font-size: 0.8rem;
+    margin: 0.5rem 0;
   }
+
+  .user-stats {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    margin: 0.625rem 0;
+  }
+}
+
+/* Tablet */
+
+@media (max-width: 992px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .user-card {
+        position: static;
+    }
+
+    .result-section {
+        min-height: auto;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 576px) {
+
+    .user-card {
+        padding: 20px;
+
+        border-radius: 15px;
+    }
+
+    .user-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .user-name {
+        font-size: 1.5rem;
+    }
+
+    .user-bio,
+    .user-location,
+    .user-company,
+    .user-blog,
+    .user-twitter,
+    .user-created-at,
+    .user-stats {
+        font-size: 0.9rem;
+    }
+
+    .user-stats {
+        padding: 14px;
+    }
+
+    .result-section {
+        padding: 1rem;
+    }
 }

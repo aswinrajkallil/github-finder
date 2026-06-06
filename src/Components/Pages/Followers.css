@@ -1,0 +1,164 @@
+/* ===== Followers.css - Followers Page Styling ===== */
+
+/* ===== Followers Container ===== */
+
+.followers-container {
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Page Title ===== */
+
+.followers-title {
+  text-align: center;
+  font-size: 1.75rem;
+  margin: 0 0 2rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Followers Grid ===== */
+
+.followers-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===== Individual Follower Card ===== */
+
+.followers-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.followers-item::before {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(88, 166, 255, 0.1), transparent);
+  transition: top 0.4s ease;
+  z-index: 1;
+}
+
+.followers-item:hover::before {
+  top: 100%;
+}
+
+.followers-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 8px 20px rgba(88, 166, 255, 0.25);
+  background: var(--bg-tertiary);
+}
+
+/* ===== Follower Avatar ===== */
+
+.followers-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-blue);
+  transition: all var(--transition-normal);
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.2);
+}
+
+.followers-item:hover .followers-avatar {
+  transform: scale(1.1) rotate(5deg);
+  border-color: var(--accent-blue-light);
+  box-shadow: 0 6px 16px rgba(88, 166, 255, 0.3);
+}
+
+/* ===== Follower Login/Name ===== */
+
+.followers-login {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-word;
+  text-align: center;
+  transition: color var(--transition-fast);
+  z-index: 2;
+  max-width: 100%;
+}
+
+.followers-item:hover .followers-login {
+  color: var(--accent-blue);
+}
+
+/* ===== Responsive Design ===== */
+
+/* Tablet - 768px and below */
+@media (max-width: 768px) {
+  .followers-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .followers-list {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .followers-item {
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
+  .followers-avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .followers-login {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  .followers-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .followers-list {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.875rem;
+  }
+
+  .followers-item {
+    padding: 0.875rem;
+    border-radius: 8px;
+  }
+
+  .followers-avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .followers-login {
+    font-size: 0.8rem;
+  }
+}
