@@ -159,7 +159,7 @@ Feel free to fork the project and submit a pull request.
 **Aswin Raj**
 
 - GitHub: https://github.com/aswinrajkallil
-- LinkedIn: linkedin.com/in/aswinrajkallil
+- LinkedIn: https://linkedin.com/in/aswinrajkallil
 - Portfolio: https://aswinraj.dev
 
 ---
