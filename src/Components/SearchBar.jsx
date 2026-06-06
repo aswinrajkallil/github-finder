@@ -2,27 +2,27 @@ import React from 'react'
 import { useState } from 'react';
 import UserCard from './UserCard';
 import './SearchBar.css';
+import Followers from './Pages/Followers';
 
 function SearchBar() {
 
 const [Username, setUsername] = useState({});
 const [Followers, setFollowers] = useState([]);
 const [Following, setFollowing] = useState([]);
-const [Repos, setRepos] = useState([]);
 
 const searchUser = async (username) => {
     try{
         const response = await fetch(`https://api.github.com/users/${username}`);
         const userData = await response.json();
         console.log(userData);
-        // 
+      // 
         const followersResponse = await fetch(userData.followers_url);
         const followersData = await followersResponse.json();
-        // console.log(followersData);
+        console.log(followersData);
 
-        const followingResponse = await fetch(userData.Following_url);
+        const followingResponse = await fetch(userData.following_url.replace('{/other_user}', ''));
         const followingData = await followingResponse.json();
-        // console.log(followingData);`);
+        console.log(followingData);
 
         if(userData.message === 'Not Found'){
             alert('User not found!');
@@ -45,14 +45,8 @@ const searchUser = async (username) => {
             twitter: userData.twitter_username,
             created_at: userData.created_at
         })
-
-        setFollowers({
-          followersData
-
-        }
-          );
-        setFollowing(followingResponse);
-        setRepos(public_repos);
+        setFollowers(followersData);
+        setFollowing(followingData);
 
     }
     catch(error){
@@ -92,10 +86,7 @@ const handleSearch = () => {
         bio: Username.bio,
         avatar: Username.avatar,
         followers: Username.followers,
-        followers_url: Username.followers_url,
         following: Username.following,
-        following_url: Username.following_url,
-        repos: Username.repos,
         profilelink: Username.profilelink,
         created_at: Username.created_at,
         location: Username.location,
@@ -103,9 +94,8 @@ const handleSearch = () => {
         blog: Username.blog,
         twitter: Username.twitter
       }}
-      followers={Followers}
-      following={Following}
-      repos={Repos}
+      Followers={Followers}
+      Following={Following}
       />
     </div>
   )
