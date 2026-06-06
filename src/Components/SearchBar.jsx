@@ -13,7 +13,10 @@ function SearchBar({ children }) {
     const inputElement = document.getElementById('search-input');
     const username = inputElement.value;
 
-    if (!username) return;
+    if (!username) {
+      alert('Please enter a GitHub username');
+      return;
+    }
 
     try {
       const response = await fetch(`https://api.github.com/users/${username}`);
