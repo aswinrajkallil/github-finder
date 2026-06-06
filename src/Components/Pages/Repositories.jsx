@@ -8,7 +8,7 @@ const Repositories = () => {
   const repositories = location.state?.repositories || [];
 
   return (
-    <div className='repo-container'>
+    <div className='repo-container' id='content-section'>
       <h2 className='repo-title'>Repositories</h2>
 
       {repositories.length === 0 ? (

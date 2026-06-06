@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserCard from './UserCard';
 import './SearchBar.css';
 
@@ -7,6 +7,7 @@ function SearchBar({ children }) {
   const [Followers, setFollowers] = useState([]);
   const [Following, setFollowing] = useState([]);
   const [repositories, setRepositories] = useState([]);
+  const [activeSection, setActiveSection] = useState(null);
 
   const handleSearch = async () => {
     const inputElement = document.getElementById('search-input');
@@ -41,6 +42,20 @@ function SearchBar({ children }) {
       setFollowers([]);
       setFollowing([]);
       setRepositories([]);
+    }
+  };
+
+  const handleSectionChange = (section) => {
+    setActiveSection(section);
+    // Auto-scroll on mobile devices
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      setTimeout(() => {
+        const contentSection = document.getElementById('content-section');
+        if (contentSection) {
+          contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
     }
   };
 
@@ -91,15 +106,15 @@ function SearchBar({ children }) {
           Followers={Followers}
           Following={Following}
           Repositories={repositories}
+          onSectionChange={handleSectionChange}
+          activeSection={activeSection}
         />
 
         <div className='result-section'>
           {children || (
             <>
               <h2>Choose an option from the profile</h2>
-              <p>
-                Click on Followers, Following, or Repositories to view details.
-              </p>
+              <p>Click on Followers, Following, or Repositories to view details.</p>
             </>
           )}
         </div>

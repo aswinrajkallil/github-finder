@@ -43,8 +43,8 @@
 /* ===== Individual Repository Card ===== */
 
 .repo-item {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border: 2px solid var(--border-color);
   border-radius: 12px;
   padding: 1.5rem;
   transition: all var(--transition-normal);
@@ -52,6 +52,7 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .repo-item::before {
@@ -60,9 +61,9 @@
   top: 0;
   left: -100%;
   width: 100%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
-  transition: left 0.5s ease;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--accent-blue), var(--accent-blue-light), transparent);
+  transition: left 0.6s ease;
 }
 
 .repo-item:hover::before {
@@ -70,10 +71,10 @@
 }
 
 .repo-item:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
   border-color: var(--accent-blue);
-  box-shadow: 0 12px 28px rgba(88, 166, 255, 0.2);
-  background: var(--bg-tertiary);
+  box-shadow: 0 15px 35px rgba(88, 166, 255, 0.3);
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
 }
 
 /* ===== Repository Link ===== */
@@ -82,6 +83,7 @@
   text-decoration: none;
   color: inherit;
   display: block;
+  cursor: pointer;
 }
 
 /* ===== Repository Name ===== */
@@ -91,12 +93,13 @@
   margin: 0 0 0.75rem;
   font-size: 1.25rem;
   font-weight: 600;
-  transition: color var(--transition-fast);
+  transition: all var(--transition-fast);
   word-break: break-word;
 }
 
 .repo-link:hover .repo-name {
   color: var(--accent-blue-light);
+  text-shadow: 0 0 12px rgba(121, 192, 255, 0.5);
 }
 
 /* ===== Repository Description ===== */
@@ -124,8 +127,8 @@
 .repo-language,
 .repo-stars,
 .repo-forks {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+  border: 1.5px solid var(--border-color);
   border-radius: 20px;
   padding: 0.5rem 0.875rem;
   color: var(--text-secondary);
@@ -135,6 +138,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
+  cursor: default;
 }
 
 .repo-language:hover,
@@ -142,8 +146,9 @@
 .repo-forks:hover {
   border-color: var(--accent-blue);
   color: var(--accent-blue);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(88, 166, 255, 0.2);
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.05), rgba(88, 166, 255, 0.1));
 }
 
 /* ===== Responsive Design ===== */
